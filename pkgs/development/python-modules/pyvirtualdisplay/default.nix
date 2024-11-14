@@ -14,6 +14,7 @@
   entrypoint2,
   pillow,
   psutil,
+  pytest-timeout,
   pytest-xdist,
   pytestCheckHook,
   vncdo,
@@ -48,11 +49,17 @@ buildPythonPackage rec {
     pillow
     psutil
     pytest-xdist
+    pytest-timeout
     pytestCheckHook
     (vncdo.overridePythonAttrs { doCheck = false; })
     xorg.xorgserver
     xorg.xmessage
     xorg.xvfb
+  ];
+
+  pytestFlagsArray = [
+    "--timeout=900"
+    "-vvv"
   ];
 
   meta = with lib; {
